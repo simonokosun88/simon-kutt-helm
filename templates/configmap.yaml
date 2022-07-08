@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "kutt.fullname" . }}
+data:
+  PORT: "3000"
+  SITE_NAME: Kutt
+  DEFAULT_DOMAIN: localhost:3000
+  
+
+
+  LINK_LENGTH: "6"
+
+  
+  DB_HOST: postgres
+  DB_PORT: "5432"
+  DB_NAME: postgres
+  DB_USER: user
+  DB_PASSWORD: pass
+  DB_SSL: "false"
+
+  POSTGRES_USER: user
+  POSTGRES_PASSWORD: pass
+  POSTGRES_DB: kutt
+
+  NEO4J_DB_URI: bolt//localhost
+  NEO4J_DB_USERNAME: neo4j
+  NEO4J_DB_PASSWORD: pass
+
+  # Redis host and port
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+  
+
+  # Disable registration
+  DISALLOW_REGISTRATION: "false"
+
+  # Disable anonymous link creation
+  DISALLOW_ANONYMOUS_LINKS: "false"
+
+  # The daily limit for each user
+  USER_LIMIT_PER_DAY: "50"
+
+  # Create a cooldown for non-logged in users in minutes
+  # Would be ignored if DISALLOW_ANONYMOUS_LINKS is set to true
+  # Set 0 to disable
+  NON_USER_COOLDOWN: "0"
+
+  # Max number of visits for each link to have detailed stats
+  DEFAULT_MAX_STATS_PER_LINK: "5000"
+
+  # Use HTTPS for links with custom domain
+  CUSTOM_DOMAIN_USE_HTTPS: "false"
+
+  # A passphrase to encrypt JWT. Use a long and secure key.
+  JWT_SECRET: securekey
+
+  # Admin emails so they can access admin actions on settings page
+  # Comma seperated
+  ADMIN_EMAILS: "si.okosun88@gmail.com"
+
+  
+
+  
+
+  
+
+  # Google Analytics tracking ID for universal analytics
+  # This one is used for links
+  # GOOGLE_ANALYTICS_UNIVERSAL=
+
+  # Your email host details to use to send verification emails.
+  # More info on http://nodemailer.com/
+  # Mail from example "Kutt <support@kutt.it>". Leave empty to use MAIL_USER
+  MAIL_HOST: smtp.gmail.com
+  MAIL_PORT: "465"
+  MAIL_SECURE: "true"
+  MAIL_USER: si.okosun88@gmail.com
+  MAIL_FROM: si.okosun88@gmail.com
+  MAIL_PASSWORD: changeme

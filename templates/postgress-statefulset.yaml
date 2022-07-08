@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgress-sts
+spec:
+  serviceName: "postgress"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgress
+  template:
+    metadata:
+      labels:
+        app: postgress
+    spec:
+      volumes:
+        - name: postgress-data-vol
+          persistentVolumeClaim:
+            claimName: simon-pvc
+      containers:
+      - name: postgress
+        image: postgres:12-alpine
+        ports:
+        - containerPort: 5432
+          name: postgress
+        volumeMounts:
+          - mountPath: "/data"
+            name: postgress-data-vol
+        env:
+          - name: POSTGRES_USER
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "kutt.fullname" . }}
+                key:  POSTGRES_USER
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "kutt.fullname" . }}
+                key:  POSTGRES_PASSWORD
+          - name: POSTGRES_DB
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "kutt.fullname" . }}
+                key:  POSTGRES_DB

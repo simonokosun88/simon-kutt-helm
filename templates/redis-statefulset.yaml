@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-sts
+spec:
+  serviceName: "redis"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      volumes:
+        - name: redis-data-vol
+          persistentVolumeClaim:
+            claimName: simon-pvc1
+      containers:
+      - name: redis
+        image: redis:6.0-alpine
+        volumeMounts:
+          - mountPath: "/data"
+            name: redis-data-vol  
