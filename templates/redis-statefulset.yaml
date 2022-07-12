@@ -13,13 +13,6 @@ spec:
       labels:
         app: redis
     spec:
-      volumes:
-        - name: redis-data-vol
-          persistentVolumeClaim:
-            claimName: simon-pvc1
       containers:
       - name: redis
-        image: redis:6.0-alpine
-        volumeMounts:
-          - mountPath: "/data"
-            name: redis-data-vol  
+        image: redis:6.0-alpine 
