@@ -13,19 +13,12 @@ spec:
       labels:
         app: postgress
     spec:
-      volumes:
-        - name: postgress-data-vol
-          persistentVolumeClaim:
-            claimName: simon-pvc
       containers:
       - name: postgress
         image: postgres:12-alpine
         ports:
         - containerPort: 5432
           name: postgress
-        volumeMounts:
-          - mountPath: "/data"
-            name: postgress-data-vol
         env:
           - name: POSTGRES_USER
             valueFrom:
